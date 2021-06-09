@@ -265,9 +265,9 @@ for idx, row in enumerate(ws.values):
             n = 'Debit Ledger ' + str(m)+' Amount'
             if acttest(n) == True:
                 s = s + float(row[headers[n]])
-        AMOUNT.text = str(float(s))
+        AMOUNT.text = str(round(float(s)))
         VATEXPAMOUNT = et.SubElement(c, 'VATEXPAMOUNT')
-        VATEXPAMOUNT.text = str(float(s))
+        VATEXPAMOUNT.text = str(round(float(s)))
         d = et.SubElement(c, 'BILLALLOCATIONS.LIST')
         NAME = et.SubElement(d, 'NAME')
         NAME.text = row[headers['Supplier Inv No']]
@@ -308,12 +308,12 @@ for idx, row in enumerate(ws.values):
                 ISLASTDEEMEDPOSITIVE = et.SubElement(f, 'ISLASTDEEMEDPOSITIVE')
                 ISLASTDEEMEDPOSITIVE.text = 'Yes'
                 AMOUNT = et.SubElement(f, 'AMOUNT')
-                AMOUNT.text = ""+str(-float(row[headers[n2]]))
+                AMOUNT.text = ""+str(-round(float(row[headers[n2]])))
                 if acttest(n2) == 0:
                     VOUCHER.remove(f)
                     next
                 VATEXPAMOUNT = et.SubElement(f, 'VATEXPAMOUNT')
-                VATEXPAMOUNT.text = ""+str(-float(row[headers[n2]]))
+                VATEXPAMOUNT.text = ""+str(-round(float(row[headers[n2]])))
                 g = et.SubElement(f, 'RATEDETAILS.LIST')
                 GSTRATEDUTYHEAD = et.SubElement(g, 'GSTRATEDUTYHEAD')
                 GSTRATEDUTYHEAD.text = 'Integrated Tax'
@@ -366,6 +366,3 @@ indent(root)
 with open ('with_breaks.xml', 'wb') as file:
     tree.write(file)
       
-
-
-
